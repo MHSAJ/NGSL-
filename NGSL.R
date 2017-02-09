@@ -91,10 +91,15 @@ cor(ngsl.data$grade,ngsl.data$avgtotal)
 cor(ngsl.data$grade,ngsl.data$avgtotal)
 
 ### run linear model 
-mod1 <- lm(grade ~ avgtotal, data = ngsl.data)
+mod1 <- lm(avgtotal ~ grade, data = ngsl.data)
 summary(mod1)
 
+mod2 <- lm(cl1 ~ a1 + e1, data = ngsl.data)
+summary(mod2)
 
+mod3 <- lm(cl3 ~ a3 + e3, data = ngsl.data)
+summary(mod3)
 
-
+mod4 <- lm(cl2 ~ a2 + e2, data = ngsl.data)
+summary(mod4)
 
