@@ -29,3 +29,49 @@ summary(m1) #these are unstandardized
 
 library(lm.beta) #to get quick standardized betas without rescaling
 lm.beta(m1)
+
+######
+
+library(rio)
+library(dplyr)
+
+ngsl.data<-import("/Users/ericwulff/Desktop/MHS/MasterRespones#1.xlsx")
+
+ngsl.data<-ngsl.data[-1,]
+
+colnames(ngsl.data)<-c('student','extra','r1','a1','e1','cr1','cl1','r2','a2','e2','cr2','cl2','r3','a3','e3','cr3','cl3','extra2','grade')
+
+ngsl.data$extra=NULL 
+ngsl.data$extra2=NULL
+
+ngsl.data<-na.omit(ngsl.data)
+
+ngsl.data$a1<-as.numeric(as.character(ngsl.data$a1))
+ngsl.data$e1<-as.numeric(as.character(ngsl.data$e1))
+ngsl.data$cr1<-as.numeric(as.character(ngsl.data$cr1))
+ngsl.data$cl1<-as.numeric(as.character(ngsl.data$cl1))
+ngsl.data$a2<-as.numeric(as.character(ngsl.data$a2))
+ngsl.data$e2<-as.numeric(as.character(ngsl.data$e2))
+ngsl.data$cr2<-as.numeric(as.character(ngsl.data$cr2))
+ngsl.data$cl2<-as.numeric(as.character(ngsl.data$cl2))
+ngsl.data$a3<-as.numeric(as.character(ngsl.data$a3))
+ngsl.data$e3<-as.numeric(as.character(ngsl.data$e3))
+ngsl.data$cr3<-as.numeric(as.character(ngsl.data$cr3))
+ngsl.data$cl3<-as.numeric(as.character(ngsl.data$cl3))
+
+
+finaldata<-mutate(ngsl.data, avg1=((a1+e1+cr1+cl1)/4), avg2=((a2+e2+cr2+cl2)/4),avg3=((a3+e3+cr3+cl3)/4))
+
+t.test(finaldata$avg1,finaldata$avg3) ###ttest with two numeric variables###
+
+write.csv(finaldata, file="NGSLallresponses.csv")
+
+####################################
+
+ngsl.data<-import("/Users/ericwulff/Desktop/MHS/NGSLallresponses.csv")
+
+
+
+
+
+
