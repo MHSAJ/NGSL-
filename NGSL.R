@@ -33,19 +33,22 @@ lm.beta(m1)
 ######
 
 library(rio)
-library(dplyr)
+install.packages('dplyr')
 
+library(dplyr)
+## importing data 
 ngsl.data<-import("/Users/ericwulff/Desktop/MHS/MasterRespones#1.xlsx")
 
+## removing the first row
 ngsl.data<-ngsl.data[-1,]
-
+#renaming variables 
 colnames(ngsl.data)<-c('student','extra','r1','a1','e1','cr1','cl1','r2','a2','e2','cr2','cl2','r3','a3','e3','cr3','cl3','extra2','grade')
-
+#deleting columns 
 ngsl.data$extra=NULL 
 ngsl.data$extra2=NULL
-
+##### removes all na data from dataset #### 
 ngsl.data<-na.omit(ngsl.data)
-
+### making every column numeric ### 
 ngsl.data$a1<-as.numeric(as.character(ngsl.data$a1))
 ngsl.data$e1<-as.numeric(as.character(ngsl.data$e1))
 ngsl.data$cr1<-as.numeric(as.character(ngsl.data$cr1))
@@ -59,11 +62,14 @@ ngsl.data$e3<-as.numeric(as.character(ngsl.data$e3))
 ngsl.data$cr3<-as.numeric(as.character(ngsl.data$cr3))
 ngsl.data$cl3<-as.numeric(as.character(ngsl.data$cl3))
 
-
+## averaging the column scores per response and creating new columns 
 finaldata<-mutate(ngsl.data, avg1=((a1+e1+cr1+cl1)/4), avg2=((a2+e2+cr2+cl2)/4),avg3=((a3+e3+cr3+cl3)/4))
-
+finaldata
+## run t-test on averages 
 t.test(finaldata$avg1,finaldata$avg3) ###ttest with two numeric variables###
+t.test(finaldata$avg2,finaldata$avg3)
 
+## export 
 write.csv(finaldata, file="NGSLallresponses.csv")
 
 ####################################
