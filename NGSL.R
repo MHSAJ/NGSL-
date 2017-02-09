@@ -75,7 +75,13 @@ write.csv(finaldata, file="NGSLallresponses.csv")
 ####################################
 
 ngsl.data<-import("/Users/ericwulff/Desktop/MHS/NGSLallresponses.csv")
+ngsl.data<-mutate(ngsl.data, davg13= (avg3-avg1)) ##add column with difference between avg3 and avg1 called davg13##
+ngsl.data<-mutate(ngsl.data, avgtotal= ((avg1+avg2+avg3)/2))##add average total #33
 
+cor(ngsl.data$grade,ngsl.data$davg13) ## correlation between grade and difference in avgerage from 1 to 3##
+cor(ngsl.data$grade,ngsl.data$avg3)
+cor(ngsl.data$grade,ngsl.data$avgtotal)
+cor(ngsl.data$grade,ngsl.data$avgtotal)
 
 
 
