@@ -1,7 +1,7 @@
 library(rio)
 library(psych)
-
-NGSL.data <- import("/Users/ajwfg4/Desktop/NGSL Stuff/features, numeric .csv",header = TRUE) 
+### sorry for the wonky data file name ### 
+NGSL.data <- import("/Users/tassiwomack/Desktop/features, numeric.csv",header = TRUE) 
 
 NGSL.data1 <-NGSL.data[,-c(1,2)] 
 NGSLcor <- cor(NGSL.data1)
