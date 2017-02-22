@@ -20,20 +20,29 @@ Lround
 
 ### look like 310 primary components #### 
 
-
-pca310 <- principal(r = NGSLcor, nfactors = 310, n.obs = 488)
-
+### start with 5 to check to make sure it works #### 
+pca310 <- principal(r = NGSLcor, nfactors = 310, n.obs = 488, rotate = 'none')
+pca5
 pca310
+
+## 
 
 NGSLpca <- NGSL.data[,c(1,2)]
 
-factor.scores(NGSL.data1,pca310)
+#### factor.scores(NGSL.data1,pca310) ####
+### make it into a values list #####
 pcascores <- factor.scores(NGSL.data1,pca310)
 str(pcascores)
 head(pcascores)
 pcascores$scores
+
 NGSLpca$pcascores <- pcascores$scores[,1]
-                                
 
+### Make a value table of just the component coefficents ###                                
+pcascores <- pcascores$scores[,1:310]
+### Convert that to a proper data frame 
+tmp <- data.frame(pcascores)
 
+### use combine fucntion 'cbind' to merge two data frames together 
+new <- cbind(NGSLpca, tmp)
 
